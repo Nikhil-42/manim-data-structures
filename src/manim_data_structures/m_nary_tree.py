@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Hashable
 
 import networkx as nx
@@ -42,7 +40,7 @@ class N_ary_tree(Tree):
         vertex_type: Callable[..., Mobject],
         edge_buff=0.4,
         layout_config=None,
-        **kwargs,
+        **kwargs
     ):
         if layout_config is None:
             layout_config = {"vertex_spacing": (-1, 1)}
@@ -100,7 +98,7 @@ if __name__ == "__main__":
     class TestScene(Scene):
         def construct(self):
             tree = N_ary_tree(
-                {0: 0, 1: 1, 4: 4, 2: 7},
+                {0: 0, 1: 1, 4: 4},
                 num_child=2,
                 vertex_type=Integer,
                 layout_config={"vertex_spacing": (1, -1)},
