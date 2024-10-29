@@ -1,8 +1,7 @@
-from typing import Hashable
+from typing import Any, Callable, Hashable
 
 import networkx as nx
 from m_tree import Tree
-from manim import *
 from manim import WHITE, Graph, Mobject, VMobject
 
 
@@ -94,6 +93,7 @@ class N_ary_tree(Tree):
 
 
 if __name__ == "__main__":
+    from manim import *
 
     class TestScene(Scene):
         def construct(self):

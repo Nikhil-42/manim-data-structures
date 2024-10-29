@@ -1,6 +1,7 @@
-from m_nary_tree import N_ary_tree, _nary_layout
-from manim import *
-from manim import Create, Integer, Scene
+from typing import Callable
+
+from m_nary_tree import N_ary_tree
+from manim import Integer, Scene
 
 
 class BinaryHeap(N_ary_tree):
@@ -67,6 +68,7 @@ class BinaryHeap(N_ary_tree):
 
 
 if __name__ == "__main__":
+    from manim import *
 
     class TestScene(Scene):
         def construct(self):
