@@ -1,9 +1,8 @@
-from typing import Hashable
+from typing import Any, Callable, Hashable
 
 import networkx as nx
 from m_tree import Tree
-from manim import *
-from manim import WHITE, Graph, Mobject, VMobject
+from manim import Mobject
 
 
 def _nary_layout(
@@ -16,7 +15,7 @@ def _nary_layout(
     if not nx.is_tree(T):
         raise ValueError("The tree layout must be used with trees")
 
-    max_height = N_ary_tree.calc_loc(max(T), n)[1]
+    max_height = NaryTree.calc_loc(max(T), n)[1]
 
     def calc_pos(x, y):
         """
@@ -28,11 +27,11 @@ def _nary_layout(
 
     return {
         i: np.array([x, y, 0])
-        for i, (x, y) in ((i, calc_pos(*N_ary_tree.calc_loc(i, n))) for i in T)
+        for i, (x, y) in ((i, calc_pos(*NaryTree.calc_loc(i, n))) for i in T)
     }
 
 
-class N_ary_tree(Tree):
+class NaryTree(Tree):
     def __init__(
         self,
         nodes: dict[int, Any],
@@ -78,9 +77,9 @@ class N_ary_tree(Tree):
         """
         Returns the index of the parent of the node at the given index
         """
-        x, y = N_ary_tree.calc_loc(idx, self.num_child)
+        x, y = NaryTree.calc_loc(idx, self.num_child)
         new_loc = x // self.num_child, y - 1
-        return N_ary_tree.calc_idx(new_loc, self.num_child)
+        return NaryTree.calc_idx(new_loc, self.num_child)
 
     def insert_node(self, node: Any, index: Hashable):
         """Inserts a node into the graph"""
@@ -94,10 +93,11 @@ class N_ary_tree(Tree):
 
 
 if __name__ == "__main__":
+    from manim import *
 
     class TestScene(Scene):
         def construct(self):
-            tree = N_ary_tree(
+            tree = NaryTree(
                 {0: 0, 1: 1, 4: 4},
                 num_child=2,
                 vertex_type=Integer,
